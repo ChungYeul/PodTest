@@ -15,6 +15,12 @@
 
 @implementation ViewController
 - (IBAction)captureScreen:(id)sender {
+    NSArray *views =[[NSBundle mainBundle] loadNibNamed:@"AlertView" owner:nil options:nil];
+    UIView *alertView = views[0];
+    [self.view addSubview:alertView];
+    
+    NSLog(@"views %@", views);
+    
     UIImage *image = [self screenshot];
     
     UIImageWriteToSavedPhotosAlbum(
