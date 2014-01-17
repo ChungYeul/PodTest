@@ -7,8 +7,9 @@
 //
 
 #import "ViewController.h"
-
+#import <AFNetworking/AFNetworking.h>
 @interface ViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *ipLabel;
 
 @end
 
@@ -18,6 +19,14 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:@"http://ip.jsontest.com" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject[@"ip"]);
+        NSString *ipAddress = responseObject[@"ip"];
+        self.ipLabel.text = ipAddress;
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
 }
 
 - (void)didReceiveMemoryWarning
