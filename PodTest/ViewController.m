@@ -23,12 +23,17 @@
     [manager GET:@"http://ip.jsontest.com" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject[@"ip"]);
         NSString *ipAddress = responseObject[@"ip"];
-        self.ipLabel.text = ipAddress;
+//        self.ipLabel.text = ipAddress;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.ipLabel.font = [UIFont fontWithName:@"NanumBrushOTF" size:30.0];
+
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
